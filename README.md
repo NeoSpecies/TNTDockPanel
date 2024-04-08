@@ -612,7 +612,766 @@ error_response = docker_networks.remove(network_id="nonexisting")
   }
 }
 ```
+#### DockerVolume 类使用示例
 
+`DockerVolume` 类提供了一系列方法来管理 Docker 卷，包括列出、获取、删除、清理和创建卷。
+
+#### 使用方式
+
+首先，请确保您有 Docker 守护程序正在运行，并且您有与 Docker 交互的必要权限。
+
+实例化类：
+
+```python
+from your_module_name import DockerVolume  # 将 your_module_name 替换为您模块的实际名称
+
+docker_volume = DockerVolume()
+```
+
+##### 列出卷
+
+列出所有卷以及它们的信息：
+
+```python
+list_result = docker_volume.list()
+```
+
+###### 示例响应：
+
+```json
+[
+  {
+    "name": "my-volume",
+    "driver": "local",
+    "mountpoint": "/var/lib/docker/volumes/my-volume/_data"
+  },
+  ...
+]
+```
+
+##### 获取卷
+
+通过名称获取特定卷的信息：
+
+```python
+get_result = docker_volume.get(volume_name="my-volume")
+```
+
+###### 示例响应：
+
+```json
+{
+  "name": "my-volume",
+  "driver": "local",
+  "mountpoint": "/var/lib/docker/volumes/my-volume/_data"
+}
+```
+
+##### 删除卷
+
+通过名称删除特定卷：
+
+```python
+remove_result = docker_volume.remove(volume_name="my-volume", force=True)
+```
+
+###### 示例响应：
+
+```json
+{
+  "message": "Volume removed"
+}
+```
+
+##### 清理未使用的卷
+
+清理未使用的卷并返回回收的空间量：
+
+```python
+prune_result = docker_volume.prune()
+```
+
+###### 示例响应：
+
+```json
+{
+  "VolumesDeleted": ["my-unused-volume"],
+  "SpaceReclaimed": 1024
+}
+```
+
+##### 创建卷
+
+创建一个新的卷并返回其信息：
+
+```python
+create_result = docker_volume.create(volume_data={"name": "new-volume", "driver": "local"})
+```
+
+###### 示例响应：
+
+```json
+{
+  "name": "new-volume"
+}
+```
+
+### 错误处理
+
+如果出现错误，响应将包括错误代码和消息，指示出了什么问题。例如，如果您尝试删除一个不存在的卷：
+
+```python
+error_response = docker_volume.remove(volume_name="nonexisting-volume")
+```
+
+##### 示例错误响应：
+
+```json
+{
+  "error": {
+    "code": 404,
+    "message": "卷 nonexisting-volume 不存在"
+  }
+}
+```
+#### Docker 节点管理
+
+`DockerNodes` 类提供了一系列方法来管理 Docker Swarm 集群中的节点，包括列出节点、获取节点详细信息、更新节点和删除节点。
+
+#### 使用方式
+
+首先，请确保您有 Docker 守护程序正在运行，并且您有与 Docker 交互的必要权限，并且 Swarm 模式已经被激活。
+
+实例化类：
+
+```python
+from your_module_name import DockerNodes  # 将 your_module_name 替换为您模块的实际名称
+
+docker_nodes = DockerNodes()
+```
+
+##### 列出节点
+
+列出 Swarm 集群中的所有节点以及它们的信息：
+
+```python
+list_nodes_result = docker_nodes.list_nodes()
+```
+
+###### 示例响应：
+
+```json
+{
+  "nodes": [
+    {
+      "id": "24ifsmvkjbyhk",
+      "hostname": "node-1",
+      "status": "ready",
+      "role": "manager"
+    },
+    {
+      "id": "57fyk3xpe5k8",
+      "hostname": "node-2",
+      "status": "ready",
+      "role": "worker"
+    }
+  ]
+}
+```
+
+##### 获取节点详细信息
+
+获取特定节点的详细信息：
+
+```python
+get_node_details_result = docker_nodes.get_node_details(node_id="24ifsmvkjbyhk")
+```
+
+###### 示例响应：
+
+```json
+{
+  "id": "24ifsmvkjbyhk",
+  "hostname": "node-1",
+  "status": {
+    "State": "ready",
+    "Addr": "192.168.1.100"
+  },
+  "role": "manager"
+}
+```
+
+##### 更新节点
+
+更新特定节点的属性：
+
+```python
+update_node_result = docker_nodes.update_node(node_id="24ifsmvkjbyhk", role="worker", availability="active")
+```
+
+###### 示例响应：
+
+```json
+{
+  "message": "Node updated"
+}
+```
+
+##### 删除节点
+
+从 Swarm 集群中删除特定节点：
+
+```python
+remove_node_result = docker_nodes.remove_node(node_id="57fyk3xpe5k8")
+```
+
+###### 示例响应：
+
+```json
+{
+  "message": "Node removed"
+}
+```
+
+#### 错误处理
+
+如果在操作过程中发生错误，响应将包括错误代码和消息，指示出了什么问题。
+
+例如，如果您尝试获取一个不存在的节点的详细信息：
+
+```python
+error_response = docker_nodes.get_node_details(node_id="nonexisting-node-id")
+```
+
+##### 示例错误响应：
+
+```json
+{
+  "error": {
+    "message": "Node nonexisting-node-id not found"
+  }
+}
+``` 
+
+如果您尝试更新一个不存在的节点：
+
+```python
+error_response = docker_nodes.update_node(node_id="nonexisting-node-id", role="worker")
+```
+
+###### 示例错误响应：
+
+```json
+{
+  "error": {
+    "message": "Node nonexisting-node-id not found"
+  }
+}
+``` 
+
+如果尝试删除一个不存在的节点：
+
+```python
+error_response = docker_nodes.remove_node(node_id="nonexisting-node-id")
+```
+
+###### 示例错误响应：
+
+```json
+{
+  "error": {
+    "message": "Node nonexisting-node-id not found"
+  }
+}
+``` 
+#### 插件管理
+
+`DockerPlugins` 类提供了一系列方法来管理 Docker 插件，包括安装、配置、删除、列出和获取插件详情。
+
+#### 使用方式
+
+首先，请确保您有 Docker 守护程序正在运行，并且您有与 Docker 交互的必要权限。
+
+实例化类：
+
+```python
+from your_module_name import DockerPlugins  # 将 your_module_name 替换为您模块的实际名称
+
+docker_plugins = DockerPlugins()
+```
+
+#### 安装插件
+
+安装 Docker 插件：
+
+##### 示例代码：
+
+```python
+install_result = docker_plugins.install(name="vieux/sshfs", options={"alias": "sshfs"})
+```
+
+##### 示例响应：
+
+```json
+{
+  "message": "Plugin vieux/sshfs installed"
+}
+```
+
+#### 配置插件
+
+配置已安装的 Docker 插件：
+
+##### 示例代码：
+
+```python
+configure_result = docker_plugins.configure(plugin_name="sshfs", options={"DEBUG": "1"})
+```
+
+##### 示例响应：
+
+```json
+{
+  "message": "Plugin sshfs configured"
+}
+```
+
+#### 删除插件
+
+删除 Docker 插件：
+
+##### 示例代码：
+
+```python
+remove_result = docker_plugins.remove(plugin_name="sshfs")
+```
+
+##### 示例响应：
+
+```json
+{
+  "message": "Plugin sshfs removed"
+}
+```
+
+#### 列出插件
+
+列出所有已安装的 Docker 插件：
+
+##### 示例代码：
+
+```python
+list_result = docker_plugins.list()
+```
+
+##### 示例响应：
+
+```json
+{
+  "plugins": [
+    {
+      "name": "vieux/sshfs",
+      "id": "12345abcdef",
+      "enabled": true
+    }
+  ]
+}
+```
+
+#### 获取插件详情
+
+获取特定 Docker 插件的详情：
+
+##### 示例代码：
+
+```python
+details_result = docker_plugins.details(plugin_name="sshfs")
+```
+
+##### 示例响应：
+
+```json
+{
+  "name": "vieux/sshfs",
+  "id": "12345abcdef",
+  "enabled": true,
+  "settings": {
+    "Env": ["DEBUG=0"],
+    "Args": [],
+    "Devices": [],
+    "Mounts": []
+  }
+}
+```
+
+#### 错误处理
+
+如果出现错误，响应将包括错误代码和消息，指示出了什么问题。例如，如果您尝试安装一个不存在的插件：
+
+##### 示例代码：
+
+```python
+error_response = docker_plugins.install(name="nonexisting/plugin")
+```
+
+##### 示例错误响应：
+
+```json
+{
+  "error": {
+    "code": 404,
+    "message": "错误：请求的插件 nonexisting/plugin 在 Docker Hub 中不存在"
+  }
+}
+```
+#### Docker服务管理
+
+`DockerServices` 类提供了一系列方法来管理 Docker 服务，包括创建、列出、获取、更新和删除 Docker 服务。
+
+#### 使用方式
+
+首先，请确保您有 Docker 守护程序正在运行，并且您有与 Docker 交互的必要权限。
+
+实例化类：
+
+```python
+from your_module_name import DockerServices  # 将 your_module_name 替换为您模块的实际名称
+
+docker_services = DockerServices()
+```
+
+#### 创建服务
+
+创建新的 Docker 服务：
+
+```python
+service_data = {
+    "name": "my_service",
+    "task_template": {
+        "container_spec": {
+            "image": "nginx:latest"
+        }
+    }
+}
+create_result = docker_services.create_service(service_data=service_data)
+```
+
+##### 示例响应：
+
+```json
+{
+  "id": "jtnbj4al07nrxkuer2y39vu3h"
+}
+```
+
+#### 列出服务
+
+列出所有 Docker 服务及其详细信息：
+
+```python
+list_result = docker_services.list_services()
+```
+
+##### 示例响应：
+
+```json
+[
+  {
+    "id": "jtnbj4al07nrxkuer2y39vu3h",
+    "name": "my_service",
+    "attrs": {...}  // 服务属性的详细信息
+  }
+]
+```
+
+#### 获取服务
+
+通过 ID 获取特定 Docker 服务的详细信息：
+
+```python
+get_result = docker_services.get_service(service_id="jtnbj4al07nrxkuer2y39vu3h")
+```
+
+##### 示例响应：
+
+```json
+{
+  "id": "jtnbj4al07nrxkuer2y39vu3h",
+  "name": "my_service",
+  "attrs": {...}  // 服务属性的详细信息
+}
+```
+
+#### 更新服务
+
+更新现有 Docker 服务：
+
+```python
+service_data_update = {
+    "name": "my_updated_service",
+    "task_template": {
+        "container_spec": {
+            "image": "nginx:latest"
+        }
+    }
+}
+update_result = docker_services.update_service(service_id="jtnbj4al07nrxkuer2y39vu3h", service_data=service_data_update)
+```
+
+##### 示例响应：
+
+```json
+{
+  "message": "Service updated"
+}
+```
+
+#### 删除服务
+
+通过 ID 删除一个 Docker 服务：
+
+```python
+remove_result = docker_services.remove_service(service_id="jtnbj4al07nrxkuer2y39vu3h")
+```
+
+##### 示例响应：
+
+```json
+{
+  "message": "Service removed"
+}
+```
+
+### 错误处理
+
+如果出现错误，响应将包括错误代码和消息，指示出了什么问题。例如，如果您尝试获取一个不存在的服务：
+
+```python
+error_response = docker_services.get_service(service_id="nonexistingserviceid")
+```
+
+##### 示例错误响应：
+
+```json
+{
+  "error": {
+    "message": "Service not found"
+  }
+}
+```
+
+如果出现其他错误，比如 API 错误或 Docker 异常，响应可能如下：
+
+```json
+{
+  "error": {
+    "code": 500,
+    "message": "Internal server error"
+  }
+}
+```
+#### Docker配置管理
+
+`DockerConfigs` 类提供了一系列方法来管理 Docker 配置，包括创建、列出、获取详情和删除配置。
+
+#### 使用方式
+
+首先，请确保您有 Docker 守护程序正在运行，并且您有与 Docker 交互的必要权限。
+
+实例化类：
+
+```python
+from your_module_name import DockerConfigs  # 将 your_module_name 替换为您模块的实际名称
+
+docker_configs = DockerConfigs()
+```
+
+#### 创建配置
+
+创建一个新的配置项：
+
+```python
+create_result = docker_configs.create_config(name="myconfig", data="config_data_here")
+```
+
+##### 示例响应：
+
+```json
+{
+  "id": "k3mno4567pqr89stuvwx"
+}
+```
+
+#### 列出配置
+
+列出所有配置项：
+
+```python
+list_result = docker_configs.list_configs()
+```
+
+##### 示例响应：
+
+```json
+{
+  "configs": [
+    {"id": "abcd1234efgh5678ijkl", "name": "myconfig"}
+  ]
+}
+```
+
+#### 获取配置详情
+
+获取特定配置的详细信息：
+
+```python
+get_result = docker_configs.get_config_details(config_id="abcd1234efgh5678ijkl")
+```
+
+##### 示例响应：
+
+```json
+{
+  "id": "abcd1234efgh5678ijkl",
+  "name": "myconfig"
+}
+```
+
+#### 删除配置
+
+通过 ID 删除配置：
+
+```python
+remove_result = docker_configs.remove_config(config_id="abcd1234efgh5678ijkl")
+```
+
+##### 示例响应：
+
+```json
+{
+  "message": "Config removed"
+}
+```
+
+#### 错误处理
+
+如果出现错误，响应将包括错误代码和消息，指示出了什么问题。例如，如果您尝试获取一个不存在的配置：
+
+```python
+error_response = docker_configs.get_config_details(config_id="nonexisting")
+```
+
+##### 示例错误响应：
+
+```json
+{
+  "error": {
+    "code": 404,
+    "message": "Config not found"
+  }
+}
+```
+#### Docker秘密管理
+
+`DockerSecrets` 类提供了一系列方法来管理 Docker 秘密，包括创建、列出、获取详细信息和删除秘密。
+
+#### 使用方式
+
+首先，请确保您有 Docker 守护程序正在运行，并且您有与 Docker 交互的必要权限。
+
+实例化类：
+
+```python
+from your_module_name import DockerSecrets  # 将 your_module_name 替换为您模块的实际名称
+
+docker_secrets = DockerSecrets()
+```
+
+##### 创建秘密
+
+创建一个新的秘密：
+
+```python
+create_result = docker_secrets.create_secret(name="mysecret", data="secret_data_here")
+```
+
+###### 示例响应：
+
+```json
+{
+  "id": "k3mno4567pqr89stuvwx"
+}
+```
+
+##### 列出秘密
+
+列出所有秘密：
+
+```python
+list_result = docker_secrets.list_secrets()
+```
+
+###### 示例响应：
+
+```json
+{
+  "secrets": [
+    {"id": "abcd1234efgh5678ijkl", "name": "mysecret"}
+  ]
+}
+```
+
+##### 获取秘密详情
+
+获取特定秘密的详细信息：
+
+```python
+get_result = docker_secrets.get_secret_details(secret_id="abcd1234efgh5678ijkl")
+```
+
+###### 示例响应：
+
+```json
+{
+  "id": "abcd1234efgh5678ijkl",
+  "name": "mysecret"
+}
+```
+
+##### 删除秘密
+
+通过 ID 删除秘密：
+
+```python
+remove_result = docker_secrets.remove_secret(secret_id="abcd1234efgh5678ijkl")
+```
+
+###### 示例响应：
+
+```json
+{
+  "message": "Secret removed"
+}
+```
+
+#### 错误处理
+
+如果出现错误，响应将包括错误代码和消息，指示出了什么问题。例如，如果您尝试获取一个不存在的秘密：
+
+```python
+error_response = docker_secrets.get_secret_details(secret_id="nonexisting")
+```
+
+###### 示例错误响应：
+
+```json
+{
+  "error": {
+    "code": 404,
+    "message": "Secret not found"
+  }
+}
+```
 
 ---
 
