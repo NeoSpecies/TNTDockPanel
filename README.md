@@ -71,12 +71,22 @@ docker-compose up -d
 
 如果您考虑支持TNTDockPanel项目，我们全体开发团队将不胜感激。您的捐赠将助力我们持续推进开源项目的发展。作为感谢，我们将在开源捐赠名录中为您的logo进行展示。捐赠完成后，请通过电子邮件与我们联系，以便我们进行相应的安排。更多关于捐赠的信息，请参阅[`DONATION.md`](doc/DONATION.md)文件获取详细说明。
 
-![PayPal打赏二维码](doc/paypal.jpg)
-![支付宝打赏二维码](doc/alipay.png)
-![微信打赏二维码](doc/wechatpay.jpg)
+<div align="center">
+  <div style="display: inline-block; margin: 0 10px;">
+    <img src="doc/paypal.jpg" alt="PayPal打赏二维码" width="100">
+    <p>PayPal打赏二维码</p>
+  </div>
+  <div style="display: inline-block; margin: 0 10px;">
+    <img src="doc/alipay.png" alt="支付宝打赏二维码" width="100">
+    <p>支付宝打赏二维码</p>
+  </div>
+  <div style="display: inline-block; margin: 0 10px;">
+    <img src="doc/wechatpay.jpg" alt="微信打赏二维码" width="100">
+    <p>微信打赏二维码</p>
+  </div>
+</div>
 
-请注意，点击图片通常不会直接启动支付流程，捐赠者需要使用相应的支付平台扫描二维码进行捐赠。我们建议您在打赏时使用电脑而非手机浏览器查看这些二维码，以便更容易地使用手机支
-
+请注意，点击图片通常不会直接启动支付流程，捐赠者需要使用相应的支付平台扫描二维码进行捐赠。我们建议您在打赏时使用电脑而非手机浏览器查看这些二维码，以便更容易地使用手机支付。
 ---
 
 ## ©️ 许可证
