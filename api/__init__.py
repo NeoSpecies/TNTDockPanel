@@ -13,8 +13,7 @@ def create_app():
     # 注册请求相关的钩子
     @app.before_request
     def before_request_func():
-        before_request(app.config['NO_AUTH'])
-
+        return before_request(app.config['NO_AUTH'])
     app.after_request(after_request)
     app.teardown_request(teardown_request)
     app.teardown_appcontext(teardown_appcontext)
