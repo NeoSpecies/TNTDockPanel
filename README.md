@@ -9,7 +9,8 @@
 ![Docker](https://img.shields.io/badge/Docker-Container-blue.svg)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-
+[![language: english](https://img.shields.io/badge/language-english-blue)](READMEen.md)
+![FORESEE A.I CA](doc/tntlogo.png)
 </div>
 
 
