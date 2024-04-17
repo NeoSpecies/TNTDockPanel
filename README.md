@@ -53,15 +53,15 @@ docker-compose up -d
 
 这个项目提供了一个简单的API，允许用户通过发送JSON数据来运行和创建Docker容器。
 
-### [1.安装](doc/install.md)
-### [2.镜像管理](doc/images.md)
-### [3.容器管理](doc/containers.md)
-### [4.网络管理](doc/networks.md)
-### [5.节点管理](doc/nodes.md)
-### [6.插件管理](doc/plugins.md)
-### [7.服务管理](doc/services.md)
-### [8.配置管理](doc/configs.md)
-### [9.秘密管理](doc/secrets.md)
+### [1.安装](doc/chinese/install.md)
+### [2.镜像管理](doc/chinese/images.md)
+### [3.容器管理](doc/chinese/containers.md)
+### [4.网络管理](doc/chinese/networks.md)
+### [5.节点管理](doc/chinese/nodes.md)
+### [6.插件管理](doc/chinese/plugins.md)
+### [7.服务管理](doc/chinese/services.md)
+### [8.配置管理](doc/chinese/configs.md)
+### [9.秘密管理](doc/chinese/secrets.md)
 
 ---
 
@@ -109,7 +109,7 @@ docker-compose up -d
 
 ## 👍 贡献
 
-如果您想为TNTDockPanel做出贡献，请阅读[`CONTRIBUTING.md`](CONTRIBUTING.md)了解详细信息。
+如果您想为TNTDockPanel做出贡献，请阅读[`CONTRIBUTING.md`](doc/chinese/CONTRIBUTING.md)了解详细信息。
 
 
 ---
@@ -137,6 +137,6 @@ docker-compose up -d
 
 ## ©️ 许可证
 
-该项目遵循MIT许可证。更多信息请查看[`LICENSE`](doc/LICENSE)文件。
+该项目遵循MIT许可证。更多信息请查看[`LICENSE`](LICENSE.md)文件。
 
 ---

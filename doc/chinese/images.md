@@ -18,7 +18,7 @@ docker_images = DockerImages()
 从 Dockerfile 构建镜像：
 
 ```python
-build_result = docker_images.build(path=".", tag="my-image:latest")
+build_result = docker_images.build(path="..", tag="my-image:latest")
 ```
 
 ##### 示例响应：
