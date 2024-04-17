@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, jsonify,make_response
 
 
 def check_api_key(api_key):
@@ -9,4 +9,5 @@ def check_api_key(api_key):
 def authenticate():
     api_key = request.headers.get('Authorization')
     if not check_api_key(api_key):
-        return jsonify({'error': 'Unauthorized'}), 401
+        response = jsonify({'error': 'authentication failed'})
+        return make_response(response, 401)
