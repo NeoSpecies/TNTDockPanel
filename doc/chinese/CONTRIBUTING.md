@@ -25,7 +25,7 @@
 
 ## 您做出的任何贡献都将遵循软件许可证
 
-简而言之，当您提交代码更改时，您的提交被理解为遵循覆盖该项目的相同[MIT许可证](LICENSE.md)。如果这是个问题，请随时联系维护者。
+简而言之，当您提交代码更改时，您的提交被理解为遵循覆盖该项目的相同[MIT许可证](LICENSE)。如果这是个问题，请随时联系维护者。
 
 ## 使用Github的[issues](https://github.com/NeoSpecies/TNTDockPanel/issues)报告bugs
 
