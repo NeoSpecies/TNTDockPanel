@@ -50,15 +50,15 @@ docker-compose up -d
 
 This project provides a simple API that allows users to run and create Docker containers by sending JSON data.
 
-### [1. Installation](doc/chinese/install.md)
-### [2. Image Management](doc/chinese/images.md)
-### [3. Container Management](doc/chinese/containers.md)
-### [4. Network Management](doc/chinese/networks.md)
-### [5. Node Management](doc/chinese/nodes.md)
-### [6. Plugin Management](doc/chinese/plugins.md)
-### [7. Service Management](doc/chinese/services.md)
-### [8. Configuration Management](doc/chinese/configs.md)
-### [9. Secret Management](doc/chinese/secrets.md)
+### [1. Installation](doc/english/install.md)
+### [2. Image Management](doc/english/images.md)
+### [3. Container Management](doc/english/containers.md)
+### [4. Network Management](doc/english/networks.md)
+### [5. Node Management](doc/english/nodes.md)
+### [6. Plugin Management](doc/english/plugins.md)
+### [7. Service Management](doc/english/services.md)
+### [8. Configuration Management](doc/english/configs.md)
+### [9. Secret Management](doc/english/secrets.md)
 
 ---
 
